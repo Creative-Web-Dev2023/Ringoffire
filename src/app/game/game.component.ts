@@ -28,12 +28,17 @@ newGame() {
 takeCard() {
   if(!this.pickCardAnimation){  // nur wenn pickCardAnimation false ist, kann eine Karte genommen werden
   this.currentCard = this.game.stack.pop() ?? ''; // ?? '' bedeuten dass, wenn der Wert undefined ist, ein leerer String verwendet wird
-  console.log('Card taken:', this.currentCard);
+ 
   this.pickCardAnimation = true;
+ 
+   console.log('new Card:'+ this.currentCard);
+  console.log('Game is:' ,this.game);
 
-  setTimeout(() => {
+
+  setTimeout(() => { 
+    this.game.playedCards.push(this.currentCard);
     this.pickCardAnimation = false;
-  }, 1500); // Animation dauert 1 Sekunde
+  }, 1000); 
 }
 }
 }
