@@ -4,6 +4,10 @@ import { Game } from '../../models/game';
 import { PlayerComponent } from '../player/player.component'; 
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+import { MatDialog } from '@angular/material/dialog';
+
+
 @Component({
   selector: 'app-game',
   standalone: true,
@@ -14,26 +18,36 @@ import { MatButtonModule } from '@angular/material/button';
 export class GameComponent {
   pickCardAnimation = false;
   currentCard: string = '';
-  game!: Game; //! Definite assignment assertion dass die Variable nicht undefined oder null ist
-  constructor() {}
+  game!: Game;
+
+  constructor(private dialog: MatDialog) {}
+
   ngOnInit(): void {
     this.newGame();
   }
+
   newGame() {
     this.game = new Game();
     console.log('New game started:', this.game);
   }
+
   takeCard() {
-    if (!this.pickCardAnimation) {// nur wenn pickCardAnimation false ist, kann eine Karte genommen werden
-      this.currentCard = this.game.stack.pop() ?? ''; // ?? '' bedeuten dass, wenn der Wert undefined ist,
-      // ein leerer String verwendet wird
+    if (!this.pickCardAnimation) {
+      this.currentCard = this.game.stack.pop() ?? '';
       this.pickCardAnimation = true;
       console.log('new Card:' + this.currentCard);
       console.log('Game is:', this.game);
-           setTimeout(() => {
-              this.game.playedCards.push(this.currentCard);
-              this.pickCardAnimation = false;
-             }, 1000);
+      setTimeout(() => {
+        this.game.playedCards.push(this.currentCard);
+        this.pickCardAnimation = false;
+      }, 1000);
     }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogAddPlayerComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Dialog was closed');
+    });
   }
 }
