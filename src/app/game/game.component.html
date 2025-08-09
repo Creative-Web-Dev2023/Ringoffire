@@ -22,5 +22,5 @@
  <button mat-fab color="primary" class="btn-add" (click)="openDialog()">
         <mat-icon>add</mat-icon>
 </button>
-<app-game-info ></app-game-info>
+<app-game-info [card]="currentCard"></app-game-info>
 <!-- <app-game-info [card]="game.currentCard || game.playedCards[game.playedCards.length - 1]"></app-game-info> -->
