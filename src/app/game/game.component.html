@@ -18,6 +18,9 @@
           <img (click)="takeCard()" *ngIf="pickCardAnimation" class="pick-card" src="assets/img/cards/{{ currentCard }}.png">
     </div>
 </div>
+
  <button mat-fab color="primary" class="btn-add" (click)="openDialog()">
         <mat-icon>add</mat-icon>
 </button>
+<app-game-info ></app-game-info>
+<!-- <app-game-info [card]="game.currentCard || game.playedCards[game.playedCards.length - 1]"></app-game-info> -->
